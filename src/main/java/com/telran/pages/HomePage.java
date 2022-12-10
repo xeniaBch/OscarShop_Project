@@ -60,5 +60,9 @@ public class HomePage extends PageBase{
         click(accountLink);
     }
 
-
+    @FindBy(xpath="//a[contains(text(),'Oscar')]")
+    WebElement logo;
+    public void clickOnLogo() {
+        click(logo);
+    }
 }

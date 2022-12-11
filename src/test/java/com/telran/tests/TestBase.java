@@ -4,6 +4,7 @@ import ch.qos.logback.classic.Logger;
 import com.telran.pages.PageBase;
 import com.telran.utils.MyListener;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
@@ -21,6 +22,10 @@ public class TestBase {
 
     @BeforeMethod
     public void init(){
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("headless");
+        //options.addArguments("windows-size=1200X800");
+        //driver = new EventFiringWebDriver(new ChromeDriver(options));
         driver = new EventFiringWebDriver(new ChromeDriver());
         driver.manage().window().maximize();
         driver.get("http://selenium1py.pythonanywhere.com/");

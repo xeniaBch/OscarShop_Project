@@ -77,7 +77,10 @@ public class BasketPage extends PageBase{
         clickWithJSExecutor(place, 0, 400);
     }
 
+    @FindBy(css = "h3 > a")
+    WebElement purchase;
     public String orderConfirmation() {
-        return null;
+        System.out.println(purchase.getText());
+        return purchase.getText();
     }
 }

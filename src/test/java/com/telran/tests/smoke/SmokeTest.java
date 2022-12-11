@@ -31,7 +31,7 @@ public class SmokeTest extends TestBase {
                 AddressData.CITY, AddressData.ZIP_CODE, AddressData.PHONE, AddressData.INSTRUCTION);
         new BasketPage(driver).payment();
         new BasketPage(driver).placeOrder();
-        //Assert.assertTrue(new BasketPage(driver).orderConfirmation().contains("The shellcoder's handbook"));
+        Assert.assertTrue(new BasketPage(driver).orderConfirmation().contains("The shellcoder's handbook"));
 
 
     }

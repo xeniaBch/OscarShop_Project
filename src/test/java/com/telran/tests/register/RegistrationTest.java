@@ -40,21 +40,21 @@ public class RegistrationTest extends TestBaseNew {
     public void registerWithEmptyEmailFieldTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUserWithEmptyEmail(UserData.PASSWORD, UserData.PASSWORD_CONFIRMATION);
-        Assert.assertTrue(new LoginPage(driver).userIsOnRegisterPage().contains("Register"));
+        Assert.assertTrue(new LoginPage(driver).checkHeaderRegister().contains("Register"));
     }
 
     @Test (enabled = false)
     public void registerWithEmptyPasswordFieldTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUserWithEmptPassword(UserData.EMAIL);
-        Assert.assertTrue(new LoginPage(driver).userIsOnRegisterPage().contains("Register"));
+        Assert.assertTrue(new LoginPage(driver).checkHeaderRegister().contains("Register"));
     }
 
     @Test (dataProvider = "newUserNegativeEmailRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)
     public void registerFromCsvNegativeEmailTest(User user){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(user.getEmail(), user.getPassword(), user.getConfirmPassword());
-        Assert.assertTrue(new LoginPage(driver).userIsOnRegisterPage().contains("Register"));
+        Assert.assertTrue(new LoginPage(driver).checkHeaderRegister().contains("Register"));
     }
 
     @Test (dataProvider = "newUserNegativePasswordRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)

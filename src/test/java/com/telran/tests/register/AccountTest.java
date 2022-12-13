@@ -1,6 +1,5 @@
 package com.telran.tests.register;
 
-import com.telran.data.UserData;
 import com.telran.pages.AccountPage;
 import com.telran.pages.HeaderPage;
 import com.telran.pages.LoginPage;
@@ -19,9 +18,10 @@ public class AccountTest extends TestBaseNew {
     }
 
 
-    @Test (dataProvider = "newUserPositiveRegisterWithCsv", dataProviderClass = DataProviders.class)
+
+    @Test (dataProvider = "newUserPositiveRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)
     public void deletePositiveTest(User user){
-        new LoginPage(driver).loginWithCorrectData(user.getEmail(), user.getPassword());
+        new LoginPage(driver).loginUser(user.getEmail(), user.getPassword());
         new HeaderPage(driver).clickOnAccount();
         new AccountPage(driver).deleteProfile(user.getPassword());
     }

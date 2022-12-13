@@ -5,9 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Collection;
-import java.util.List;
-
 public class LoginPage extends PageBase {
     public LoginPage(WebDriver driver){
         super(driver);
@@ -48,7 +45,7 @@ public class LoginPage extends PageBase {
     @FindBy(name = "login_submit")
     WebElement loginButton;
 
-    public void loginWithCorrectData(String email, String password) {
+    public void loginUser(String email, String password) {
         type(loginUsername, email);
         type(loginPassword, password);
         click(loginButton);
@@ -56,7 +53,7 @@ public class LoginPage extends PageBase {
 
     @FindBy (css="#register_form > h2")
     WebElement headerRegister;
-    public String userIsOnRegisterPage() {
+    public String checkHeaderRegister() {
         return headerRegister.getText();
     }
 
@@ -78,4 +75,19 @@ public class LoginPage extends PageBase {
         System.out.println(errorBlock.getText());
         return errorBlock.getText();
     }
+
+
+    @FindBy(xpath="//form[@id='login_form']/div[2]")
+    WebElement loginErrorMessage;
+    public String checkLoginErrorMessage() {
+        return  loginErrorMessage.getText();
+    }
+
+    @FindBy (css="#login_form > h2")
+    WebElement headerLogin;
+    public String checkHeaderLogin() {
+        return headerLogin.getText();
+    }
+
+
 }

@@ -71,4 +71,9 @@ public class HeaderPage extends PageBase{
     public String checkAccount() {
         return accountLink.getText();
     }
+
+    public boolean isAccountLinkPresent() {
+
+        return accountLink.isDisplayed();
+    }
 }

@@ -17,18 +17,17 @@ public class WishListTest extends TestBaseNew {
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).loginUser(UserData.EXISTED_EMAIL, UserData.EXISTED_PASSWORD);
         new HeaderPage(driver).clickOnAccount();
+        new AccountPage(driver).selectWishList();
     }
 
     @Test
     public void createWishListTest(){
-        new AccountPage(driver).selectWishList();
         new WishListPage(driver).createNewWishList(WishListData.NAME);
         Assert.assertTrue(new WishListPage(driver).checkAlert().contains("Your wishlist has been created"));
     }
 
     @Test
     public void viewingWishListTest(){
-        new AccountPage(driver).selectWishList();
         new WishListPage(driver).createNewWishList(WishListData.NAME);
         new AccountPage(driver).selectWishList();
         new WishListPage(driver).viewWishListPage();
@@ -38,7 +37,6 @@ public class WishListTest extends TestBaseNew {
 
     @Test
     public void updateWishListQuantityTest(){
-        new AccountPage(driver).selectWishList();
         new WishListPage(driver).createNewWishList(WishListData.NAME);
         new HeaderPage(driver).clickOnLogo();
         new ProductsPage(driver).addToWishList();

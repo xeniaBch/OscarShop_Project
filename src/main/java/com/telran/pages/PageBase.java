@@ -3,7 +3,11 @@ package com.telran.pages;
 import com.google.common.io.Files;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
@@ -65,5 +69,17 @@ public class PageBase {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        public Screenshot takeScreenshotWithScrollDown(){
+            Screenshot screenshot = new AShot()
+                    .shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(2.0f), 1000))
+                    .takeScreenshot(driver);
+            try {
+                ImageIO.write(screenshot.getImage(), "png", new File("screenshot/screen" + System.currentTimeMillis()+ ".png"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            return screenshot;
         }
 }

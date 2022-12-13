@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.util.Collection;
+
 public class ProductsPage extends PageBase{
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -14,5 +16,12 @@ public class ProductsPage extends PageBase{
     WebElement add;
     public void addToBasket() {
         click(add);
+    }
+
+    @FindBy(id= "messages")
+    WebElement welcomeMessage;
+    public String checkWelcomeMessage() {
+        System.out.println(welcomeMessage.getText());
+        return welcomeMessage.getText();
     }
 }

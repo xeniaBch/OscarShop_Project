@@ -1,9 +1,12 @@
 package com.telran.pages;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import java.util.Collection;
+import java.util.List;
 
 public class LoginPage extends PageBase {
     public LoginPage(WebDriver driver){
@@ -22,13 +25,19 @@ public class LoginPage extends PageBase {
 
     @FindBy(name = "registration_submit")
     WebElement registerButton;
-    public void registerWithCorrectData(String email, String password, String passwordConfirmation) {
+    public void registerUser(String email, String password, String passwordConfirmation) {
         type(emailField, email);
         type(passwordField, password);
         type(passwordConfirmationField, passwordConfirmation);
         click(registerButton);
-
     }
+
+    public void registerUserWithEmptyEmail(String password, String passwordConfirmation) {
+        type(passwordField, password);
+        type(passwordConfirmationField, passwordConfirmation);
+        click(registerButton);
+    }
+
 
     @FindBy(id = "id_login-username")
     WebElement loginUsername;
@@ -43,5 +52,30 @@ public class LoginPage extends PageBase {
         type(loginUsername, email);
         type(loginPassword, password);
         click(loginButton);
+    }
+
+    @FindBy (css="#register_form > h2")
+    WebElement headerRegister;
+    public String userIsOnRegisterPage() {
+        return headerRegister.getText();
+    }
+
+    public void registerUserWithEmptPassword(String email) {
+        type(emailField, email);
+        click(registerButton);
+    }
+
+    @FindBy(css = ".alert.alert-danger")
+    WebElement alertError;
+    public String checkErrorMessage() {
+        System.out.println(alertError.getText());
+        return alertError.getText();
+    }
+
+    @FindBy(css = ".error-block")
+    WebElement errorBlock;
+    public String checkErrorBlock() {
+        System.out.println(errorBlock.getText());
+        return errorBlock.getText();
     }
 }

@@ -3,13 +3,14 @@ package com.telran.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class HomePage extends PageBase{
+import java.util.Collection;
+
+public class HeaderPage extends PageBase{
 
 
-    public HomePage(WebDriver driver) {
+    public HeaderPage(WebDriver driver) {
         super(driver);
     }
 
@@ -54,7 +55,7 @@ public class HomePage extends PageBase{
         click(allProducts);
     }
 
-    @FindBy(xpath="//a[contains(text(),'Account')]")
+    @FindBy(css=".nav-item > .mt-2")
     WebElement accountLink;
     public void clickOnAccount() {
         click(accountLink);
@@ -64,5 +65,10 @@ public class HomePage extends PageBase{
     WebElement logo;
     public void clickOnLogo() {
         click(logo);
+    }
+
+
+    public String checkAccount() {
+        return accountLink.getText();
     }
 }

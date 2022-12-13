@@ -1,9 +1,9 @@
-package com.telran.tests.smoke;
+package com.telran.tests_old.smoke;
 
 import com.telran.data.AddressData;
 import com.telran.data.UserData;
 import com.telran.pages.*;
-import com.telran.tests.TestBase;
+import com.telran.tests_old.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,19 +13,20 @@ public class SmokeTest extends TestBase {
 
     @BeforeMethod
     public void preconditions(){
-        new HomePage(driver).selectEnglishLanguage();
+        new HeaderPage(driver).selectEnglishLanguage();
     }
 
     @Test
     public void smokeTest(){
-        new HomePage(driver).clickOnLoginOrRegisterLink();
-        new LoginPage(driver).registerWithCorrectData(UserData.EMAIL, UserData.PASSWORD, UserData.PASSWORD_CONFIRMATION);
-        new HomePage(driver).logout();
-        new HomePage(driver).clickOnLoginOrRegisterLink();
+        new HeaderPage(driver).clickOnLoginOrRegisterLink();
+        new LoginPage(driver).takeScreenshotWithScrollDown();
+        new LoginPage(driver).registerUser(UserData.EMAIL, UserData.PASSWORD, UserData.PASSWORD_CONFIRMATION);
+        new HeaderPage(driver).logout();
+        new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).loginWithCorrectData(UserData.EMAIL, UserData.PASSWORD);
-        new HomePage(driver).selectAllProducts();
+        new HeaderPage(driver).selectAllProducts();
         new ProductsPage(driver).addToBasket();
-        new HomePage(driver).viewBasket();
+        new HeaderPage(driver).viewBasket();
         new BasketPage(driver).proceedToCheckout();
         new BasketPage(driver).fillShippingAddress(AddressData.FIRST_NAME, AddressData.LAST_NAME, AddressData.FIRST_LINE_OF_ADDRESS,
                 AddressData.CITY, AddressData.ZIP_CODE, AddressData.PHONE, AddressData.INSTRUCTION);
@@ -38,8 +39,8 @@ public class SmokeTest extends TestBase {
 
     @AfterMethod
     public void postconditions(){
-        new HomePage(driver).clickOnLogo();
-        new HomePage(driver).clickOnAccount();
+        new HeaderPage(driver).clickOnLogo();
+        new HeaderPage(driver).clickOnAccount();
         new AccountPage(driver).deleteProfile(UserData.PASSWORD);
     }
 }

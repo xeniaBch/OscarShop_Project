@@ -2,9 +2,9 @@ package com.telran.tests;
 
 import ch.qos.logback.classic.Logger;
 import com.telran.pages.PageBase;
+import com.telran.tests_old.TestBase;
 import com.telran.utils.MyListener;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
+public class TestBaseNew {
     public EventFiringWebDriver driver;
 
     Logger logger = (Logger) LoggerFactory.getLogger(TestBase.class);
@@ -28,7 +28,7 @@ public class TestBase {
         //driver = new EventFiringWebDriver(new ChromeDriver(options));
         driver = new EventFiringWebDriver(new ChromeDriver());
         driver.manage().window().maximize();
-        driver.get("http://selenium1py.pythonanywhere.com/");
+        driver.get("https://latest.oscarcommerce.com/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.register(new MyListener());
     }
@@ -61,3 +61,4 @@ public class TestBase {
         logger.info("______________________________________");
     }
 }
+

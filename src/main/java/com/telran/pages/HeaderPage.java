@@ -76,4 +76,8 @@ public class HeaderPage extends PageBase{
 
         return accountLink.isDisplayed();
     }
+
+    public boolean isLoginLinkPresent() {
+        return login_link.isDisplayed();
+    }
 }

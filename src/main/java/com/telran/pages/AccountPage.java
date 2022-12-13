@@ -61,4 +61,10 @@ public class AccountPage extends PageBase{
     public void logout(){
         click(logout);
     }
+
+    @FindBy(css=".nav-item:nth-child(7) > .nav-link")
+    WebElement selectWishList;
+    public void selectWishList() {
+        click(selectWishList);
+    }
 }

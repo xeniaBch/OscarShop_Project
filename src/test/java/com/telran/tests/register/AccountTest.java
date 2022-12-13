@@ -17,7 +17,6 @@ public class AccountTest extends TestBaseNew {
     public void preconditions(){
         new HeaderPage(driver).selectEnglishLanguage();
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
-
     }
 
     @Test

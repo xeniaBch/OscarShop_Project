@@ -36,11 +36,4 @@ public class AccountTest extends TestBaseNew {
         Assert.assertTrue(new HeaderPage(driver).isLoginLinkPresent());
     }
 
-
-    @Test (dataProvider = "newUserPositiveRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)
-    public void deletePositiveTest(User user){
-        new LoginPage(driver).loginUser(user.getEmail(), user.getPassword());
-        new HeaderPage(driver).clickOnAccount();
-        new AccountPage(driver).deleteProfile(user.getPassword());
-    }
 }

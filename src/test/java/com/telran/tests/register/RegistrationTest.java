@@ -26,6 +26,8 @@ public class RegistrationTest extends TestBaseNew {
         new LoginPage(driver).registerUser(UserData.EMAIL, UserData.PASSWORD, UserData.PASSWORD_CONFIRMATION);
         Assert.assertTrue(new HeaderPage(driver).checkAccount().contains("Account"));
         Assert.assertTrue(new ProductsPage(driver).checkWelcomeMessage().contains("Thanks for registering!"));
+        new HeaderPage(driver).clickOnAccount();
+        new AccountPage(driver).deleteProfile(UserData.PASSWORD);
     }
 
     @Test (dataProvider = "newUserPositiveRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)
@@ -34,38 +36,40 @@ public class RegistrationTest extends TestBaseNew {
         new LoginPage(driver).registerUser(user.getEmail(), user.getPassword(), user.getConfirmPassword());
         Assert.assertTrue(new HeaderPage(driver).checkAccount().contains("Account"));
         Assert.assertTrue(new ProductsPage(driver).checkWelcomeMessage().contains("Thanks for registering!"));
+        new HeaderPage(driver).clickOnAccount();
+        new AccountPage(driver).deleteProfile(user.getPassword());
     }
 
     @Test (enabled = false)
-    public void registerWithEmptyEmailFieldTest(){
+    public void registerWithEmptyEmailFieldNegativeTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUserWithEmptyEmail(UserData.PASSWORD, UserData.PASSWORD_CONFIRMATION);
         Assert.assertTrue(new LoginPage(driver).checkHeaderRegister().contains("Register"));
     }
 
     @Test (enabled = false)
-    public void registerWithEmptyPasswordFieldTest(){
+    public void registerWithEmptyPasswordFieldNegativeTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUserWithEmptPassword(UserData.EMAIL);
         Assert.assertTrue(new LoginPage(driver).checkHeaderRegister().contains("Register"));
     }
 
     @Test (dataProvider = "newUserNegativeEmailRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)
-    public void registerFromCsvNegativeEmailTest(User user){
+    public void registerFromCsvWrongEmailNegativeTest(User user){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(user.getEmail(), user.getPassword(), user.getConfirmPassword());
         Assert.assertTrue(new LoginPage(driver).checkHeaderRegister().contains("Register"));
     }
 
     @Test (dataProvider = "newUserNegativePasswordRegisterWithCsv", dataProviderClass = DataProviders.class, enabled = false)
-    public void registerFromCsvNegativePasswordTest(User user){
+    public void registerFromCsvWrongPasswordNegativeTest(User user){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(user.getEmail(), user.getPassword(), user.getConfirmPassword());
         Assert.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
     }
 
     @Test (enabled = false)
-    public void registerWithExistedUserDataTest(){
+    public void registerWithExistedUserDataNegativeTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(UserData.EXISTED_EMAIL, UserData.EXISTED_PASSWORD, UserData.EXISTED_PASSWORD_CONFIRMATION);
         Assert.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
@@ -73,16 +77,11 @@ public class RegistrationTest extends TestBaseNew {
     }
 
     @Test
-    public void registerWithDifferentPasswordConfirmationValueTest(){
+    public void registerWithDifferentPasswordConfirmationValueNegativeTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(UserData.EMAIL, UserData.PASSWORD, UserData.EXISTED_PASSWORD_CONFIRMATION);
         Assert.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
         Assert.assertTrue(new LoginPage(driver).checkErrorBlock().contains("password fields didn't match."));
     }
 
-    @AfterMethod (enabled = false)
-    public void postconditions(){
-        new HeaderPage(driver).clickOnAccount();
-        new AccountPage(driver).deleteProfile(UserData.PASSWORD);
-    }
 }

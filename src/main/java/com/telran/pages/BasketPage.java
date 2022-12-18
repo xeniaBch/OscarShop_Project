@@ -16,7 +16,7 @@ public class BasketPage extends PageBase{
     @FindBy(xpath="//a[contains(text(),'Proceed to checkout')]")
     WebElement proceed;
     public void proceedToCheckout() {
-        clickWithJSExecutor(proceed, 0, 300);
+        clickWithJSExecutor(proceed, 0, 400);
     }
 
     @FindBy(id = "id_title")
@@ -82,5 +82,11 @@ public class BasketPage extends PageBase{
     public String orderConfirmation() {
         System.out.println(purchase.getText());
         return purchase.getText();
+    }
+
+    @FindBy(css="h1")
+    WebElement unregisteredUserBasketHeader;
+    public String checkUserUnregistered() {
+        return unregisteredUserBasketHeader.getText();
     }
 }

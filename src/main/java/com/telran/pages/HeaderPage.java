@@ -110,4 +110,8 @@ public class HeaderPage extends PageBase{
         click(viewBasketButton);
         return breadcrumb.getText();
     }
+
+    public void viewBasketNew() {
+        click(viewBasketButton);
+    }
 }

@@ -1,4 +1,4 @@
-package com.telran.tests.register;
+package com.telran.tests.user;
 
 import com.telran.data.AddressData;
 import com.telran.data.UserData;
@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class AddressBookTest extends TestBaseNew {
 
@@ -35,9 +36,10 @@ public class AddressBookTest extends TestBaseNew {
         new AddressBookPage(driver).addNewAddress(AddressData.FIRST_NAME, AddressData.LAST_NAME, AddressData.FIRST_LINE_OF_ADDRESS,
                 AddressData.CITY, AddressData.ZIP_CODE, AddressData.PHONE, AddressData.INSTRUCTION);
         new AddressBookPage(driver).editAddress(AddressData.FIRST_NAME_EDITED, AddressData.FIRST_LINE_OF_ADDRESS_EDITED);
-        Assert.assertTrue(new AddressBookPage(driver).checkMessage().contains("updated"));
-        Assert.assertTrue(new AddressBookPage(driver).checkMessage().contains(AddressData.FIRST_NAME_EDITED));
-        Assert.assertTrue(new AddressBookPage(driver).checkMessage().contains(AddressData.FIRST_LINE_OF_ADDRESS_EDITED));
+        SoftAssert asrt = new SoftAssert();
+        asrt.assertTrue(new AddressBookPage(driver).checkMessage().contains("updated"));
+        asrt.assertTrue(new AddressBookPage(driver).checkMessage().contains(AddressData.FIRST_NAME_EDITED));
+        asrt.assertTrue(new AddressBookPage(driver).checkMessage().contains(AddressData.FIRST_LINE_OF_ADDRESS_EDITED));
     }
 
     @AfterMethod

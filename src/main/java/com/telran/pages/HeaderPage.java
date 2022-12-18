@@ -67,6 +67,10 @@ public class HeaderPage extends PageBase{
         click(logo);
     }
 
+    public boolean isLogoPresent(){
+        return isElementPresent(logo);
+    }
+
 
     public String checkAccount() {
         return accountLink.getText();
@@ -79,5 +83,31 @@ public class HeaderPage extends PageBase{
 
     public boolean isLoginLinkPresent() {
         return login_link.isDisplayed();
+    }
+
+    @FindBy (xpath="//input[@name='q']")
+    WebElement search;
+
+    @FindBy (xpath="//button[contains(.,'Search')]")
+    WebElement searchButton;
+    public void search(String text) {
+        type(search, text);
+        click(searchButton);
+    }
+
+    @FindBy (css=".basket-mini")
+    WebElement basketText;
+    public boolean isBasketExists() {
+        return isElementPresent(basketText);
+    }
+
+    @FindBy (css=".btn-outline-secondary:nth-child(1)")
+    WebElement viewBasketButton;
+
+    @FindBy (css=".breadcrumb")
+    WebElement breadcrumb;
+    public String isViewBasketButtonIsClickable() {
+        click(viewBasketButton);
+        return breadcrumb.getText();
     }
 }

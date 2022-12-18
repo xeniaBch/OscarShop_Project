@@ -44,4 +44,10 @@ public class ProductsPage extends PageBase{
         click(addToWishList);
         click(openWishList);
     }
+
+    @FindBy (css=".col-sm-4:nth-child(1) .mt-3 > a")
+    WebElement foundElement;
+    public String getSearchProductName() {
+        return foundElement.getText();
+    }
 }

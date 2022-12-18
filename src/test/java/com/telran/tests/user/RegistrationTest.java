@@ -1,4 +1,4 @@
-package com.telran.tests.register;
+package com.telran.tests.user;
 
 import com.telran.data.UserData;
 import com.telran.pages.AccountPage;
@@ -9,9 +9,9 @@ import com.telran.tests.TestBaseNew;
 import com.telran.utils.DataProviders;
 import com.telran.utils.model.User;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class RegistrationTest extends TestBaseNew {
 
@@ -24,8 +24,9 @@ public class RegistrationTest extends TestBaseNew {
     public void registerPositiveTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(UserData.EMAIL, UserData.PASSWORD, UserData.PASSWORD_CONFIRMATION);
-        Assert.assertTrue(new HeaderPage(driver).checkAccount().contains("Account"));
-        Assert.assertTrue(new ProductsPage(driver).checkWelcomeMessage().contains("Thanks for registering!"));
+        SoftAssert asrt = new SoftAssert();
+        asrt.assertTrue(new HeaderPage(driver).checkAccount().contains("Account"));
+        asrt.assertTrue(new ProductsPage(driver).checkWelcomeMessage().contains("Thanks for registering!"));
         new HeaderPage(driver).clickOnAccount();
         new AccountPage(driver).deleteProfile(UserData.PASSWORD);
     }
@@ -34,8 +35,9 @@ public class RegistrationTest extends TestBaseNew {
     public void registerFromCsvPositiveTest(User user){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(user.getEmail(), user.getPassword(), user.getConfirmPassword());
-        Assert.assertTrue(new HeaderPage(driver).checkAccount().contains("Account"));
-        Assert.assertTrue(new ProductsPage(driver).checkWelcomeMessage().contains("Thanks for registering!"));
+        SoftAssert asrt = new SoftAssert();
+        asrt.assertTrue(new HeaderPage(driver).checkAccount().contains("Account"));
+        asrt.assertTrue(new ProductsPage(driver).checkWelcomeMessage().contains("Thanks for registering!"));
         new HeaderPage(driver).clickOnAccount();
         new AccountPage(driver).deleteProfile(user.getPassword());
     }
@@ -72,16 +74,18 @@ public class RegistrationTest extends TestBaseNew {
     public void registerWithExistedUserDataNegativeTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(UserData.EXISTED_EMAIL, UserData.EXISTED_PASSWORD, UserData.EXISTED_PASSWORD_CONFIRMATION);
-        Assert.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
-        Assert.assertTrue(new LoginPage(driver).checkErrorBlock().contains("email address already exists"));
+        SoftAssert asrt = new SoftAssert();
+        asrt.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
+        asrt.assertTrue(new LoginPage(driver).checkErrorBlock().contains("email address already exists"));
     }
 
     @Test
     public void registerWithDifferentPasswordConfirmationValueNegativeTest(){
         new HeaderPage(driver).clickOnLoginOrRegisterLink();
         new LoginPage(driver).registerUser(UserData.EMAIL, UserData.PASSWORD, UserData.EXISTED_PASSWORD_CONFIRMATION);
-        Assert.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
-        Assert.assertTrue(new LoginPage(driver).checkErrorBlock().contains("password fields didn't match."));
+        SoftAssert asrt = new SoftAssert();
+        asrt.assertTrue(new LoginPage(driver).checkErrorMessage().contains("Oops! We found some errors"));
+        asrt.assertTrue(new LoginPage(driver).checkErrorBlock().contains("password fields didn't match."));
     }
 
 }

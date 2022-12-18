@@ -32,6 +32,10 @@ public class PageBase {
             }
         }
 
+    public boolean isElementPresent(WebElement element){
+        return element.isDisplayed();
+    }
+
         public void clickWithJSExecutor(WebElement element, int x, int y){
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(" + x + "," + y + ")");
@@ -56,12 +60,6 @@ public class PageBase {
                 e.printStackTrace();
             }
         }
-
-        public void hideAd(){
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("document.getElementById('adplus-anchor').style.display = 'none'");
-        }
-
 
         public void pause(int millis) {
             try {

@@ -1,4 +1,4 @@
-package com.telran.tests.register;
+package com.telran.tests.user;
 
 import com.telran.data.UserData;
 import com.telran.data.WishListData;

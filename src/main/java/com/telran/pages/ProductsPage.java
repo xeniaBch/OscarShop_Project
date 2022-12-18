@@ -34,7 +34,7 @@ public class ProductsPage extends PageBase{
     @FindBy(linkText="Add to 'Test Wish List' wish list")
     WebElement addToWishList;
 
-    @FindBy(xpath="//a[contains(@href, '/en-gb/accounts/wishlists/2n7jjk/')]")
+    @FindBy(css=".float-left > a")
     WebElement openWishList;
 
 
@@ -42,7 +42,7 @@ public class ProductsPage extends PageBase{
         click(productLink);
         click(selectWishList);
         click(addToWishList);
-        click(openWishList);
+        clickWithJSExecutor(openWishList, 0, 100);
     }
 
     @FindBy (css=".col-sm-4:nth-child(1) .mt-3 > a")
@@ -110,5 +110,35 @@ public class ProductsPage extends PageBase{
     WebElement previousButton;
     public void clickOnPreviousButton() {
         clickWithJSExecutor(previousButton, 0, 600);
+    }
+
+    @FindBy(id="write_review")
+    WebElement reviewButton;
+
+    @FindBy(id="id_title")
+    WebElement reviewTitle;
+
+    @FindBy(css=".controls .fas:nth-child(5)")
+    WebElement fiveStars;
+
+    @FindBy(id="id_body")
+    WebElement reviewBody;
+
+    @FindBy(xpath="//button[contains(.,'Save review')]")
+    WebElement saveReview;
+
+    public void leaveReview(String title, String body) {
+        click(productLink);
+        click(reviewButton);
+        type(reviewTitle, title);
+        click(fiveStars);
+        type(reviewBody, body);
+        click(saveReview);
+    }
+
+    @FindBy(xpath="//a[contains(text(),'1 customer review')]")
+    WebElement isReviewed;
+    public boolean isReviewed() {
+        return isReviewed.isDisplayed();
     }
 }

@@ -1,8 +1,9 @@
 package com.telran.tests.product;
 
-import com.telran.pages.BasketPage;
-import com.telran.pages.HeaderPage;
-import com.telran.pages.ProductsPage;
+import com.telran.data.ReviewData;
+import com.telran.data.UserData;
+import com.telran.data.WishListData;
+import com.telran.pages.*;
 import com.telran.tests.TestBaseNew;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -49,4 +50,28 @@ public class ProductTest extends TestBaseNew {
         new ProductsPage(driver).clickOnPreviousButton();
         Assert.assertTrue(new ProductsPage(driver).getCurrentPage().contains("1"));
     }
+
+    @Test
+    public void addToWishListPositiveTest(){
+        new HeaderPage(driver).clickOnLoginOrRegisterLink();
+        new LoginPage(driver).loginUser(UserData.EXISTED_EMAIL, UserData.EXISTED_PASSWORD);
+        new HeaderPage(driver).clickOnAccount();
+        new AccountPage(driver).selectWishList();
+        new WishListPage(driver).createNewWishList(WishListData.NAME);
+        new HeaderPage(driver).clickOnLogo();
+        new ProductsPage(driver).addToWishList();
+        Assert.assertTrue(new WishListPage(driver).isProductAdded().contains("The shellcoder's handbook"));
+        new AccountPage(driver).selectWishList();
+        new WishListPage(driver).deleteWishList();
+    }
+
+    @Test
+    public void leaveReviewPositiveTest(){
+        new HeaderPage(driver).clickOnLoginOrRegisterLink();
+        new LoginPage(driver).loginUser(UserData.EXISTED_EMAIL, UserData.EXISTED_PASSWORD);
+        new HeaderPage(driver).clickOnLogo();
+        new ProductsPage(driver).leaveReview(ReviewData.TITLE, ReviewData.BODY);
+        Assert.assertTrue(new ProductsPage(driver).isReviewed());
+    }
+
 }

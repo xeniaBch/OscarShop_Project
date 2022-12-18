@@ -69,4 +69,10 @@ public class WishListPage extends PageBase{
         click(updateQuantity);
 
     }
+
+    @FindBy (xpath="//td[2]")
+    WebElement productWishName;
+    public String isProductAdded() {
+        return productWishName.getText();
+    }
 }
